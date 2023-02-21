@@ -12,16 +12,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [],
-      child: MaterialApp(
-        title: 'Concentration',
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-        ),
-        initialRoute: TestScreen.routeName,
-        routes: {},
+    // MultiBlocProvider(
+    //   providers: [],
+    //   child:
+    // ),
+    return MaterialApp(
+      title: 'Concentration',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
       ),
+      initialRoute: TestScreen.routeName,
+      routes: {
+        TestScreen.routeName: (context) => TestScreen(),
+      },
     );
   }
 }
