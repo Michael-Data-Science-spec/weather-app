@@ -12,6 +12,9 @@ class AppSizes {
   static const double cityInfoRadiusWidth = 3;
   static const double cityInfoToTop = 220;
 
+  static const double searchToCity = 110;
+  static const double searchPromptMargin = 23;
+
   static const double dayName = 150;
   static const double weatherIcon = 100;
   static const double degree = 50;

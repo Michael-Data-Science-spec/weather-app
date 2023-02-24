@@ -3,6 +3,7 @@ import 'package:weather_app/utils/constants/app_color.dart';
 import 'package:weather_app/utils/constants/app_image_paths.dart';
 import 'package:weather_app/utils/constants/app_sizes.dart';
 import 'package:weather_app/widgets/city_info.dart';
+import 'package:weather_app/widgets/list_view_cities.dart';
 import 'package:weather_app/widgets/search_field.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,40 +23,15 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: AppSizes.cityInfoToTop),
-              const SearchField(),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    CityInfo(
-                      bgColor: AppColors.dayColor,
-                      imagePath: ImagePaths.sunnyDay,
-                      cityName: "Chicago",
-                    ),
-                    CityInfo(
-                      bgColor: AppColors.nightColor,
-                      imagePath: ImagePaths.sunnyDay,
-                      cityName: "Beijing",
-                    ),
-                    CityInfo(
-                      bgColor: AppColors.dayColor,
-                      imagePath: ImagePaths.sunnyDay,
-                      cityName: "New York",
-                    ),
-                    CityInfo(
-                      bgColor: AppColors.nightColor,
-                      imagePath: ImagePaths.sunnyDay,
-                      cityName: "Toronto",
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          )),
+            child: Column(
+              children: [
+                const SizedBox(height: AppSizes.cityInfoToTop),
+                const SearchField(),
+                const SizedBox(height: AppSizes.searchToCity),
+                Expanded(child: CityListView()),
+              ],
+            ),
+          ),
         ),
       ),
     );
