@@ -6,6 +6,7 @@ import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/firebase_options.dart';
 import 'package:weather_app/screens/city_info_screen.dart';
 import 'package:weather_app/screens/home_screen.dart';
+import 'package:weather_app/screens/login_screen.dart';
 import 'package:weather_app/screens/test_screen.dart';
 import 'package:weather_app/utils/constants/cached_data.dart';
 
@@ -36,9 +37,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.red,
         ),
-        initialRoute: HomeScreen.routeName,
+        initialRoute: LoginScreen.routeName,
         routes: {
           TestScreen.routeName: (context) => TestScreen(),
+          LoginScreen.routeName: (context) => LoginScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),
           CityInfoScreen.routeName: (context) => CityInfoScreen(),
           CachedDataScreen.routeName: (context) => CachedDataScreen(),
