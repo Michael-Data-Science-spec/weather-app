@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: AppSizes.cityInfoToTop),
-                const SearchField(),
+                SearchField(),
                 const SizedBox(height: AppSizes.searchToCity),
                 Expanded(child: CityListView()),
               ],

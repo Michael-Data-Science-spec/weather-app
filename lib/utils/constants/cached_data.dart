@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
+import 'package:weather_app/screens/city_info_screen.dart';
 import 'package:weather_app/utils/constants/app_color.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/utils/constants/app_image_paths.dart';
@@ -10,91 +11,16 @@ import 'package:weather_app/widgets/city_info.dart';
 import 'package:weather_app/widgets/one_day_forecast.dart';
 import 'package:weather_app/widgets/search_field.dart';
 
-String getImageByCode(String code) {
-  switch (code) {
-    case "01d":
-      {
-        return WeatherIcons.d1;
-      }
-    case "02d":
-      {
-        return WeatherIcons.d2;
-      }
-    case "03d":
-      {
-        return WeatherIcons.d3;
-      }
-    case "04d":
-      {
-        return WeatherIcons.d4;
-      }
-    case "09d":
-      {
-        return WeatherIcons.d9;
-      }
-    case "10d":
-      {
-        return WeatherIcons.d10;
-      }
-    case "11d":
-      {
-        return WeatherIcons.d11;
-      }
-    case "13d":
-      {
-        return WeatherIcons.d13;
-      }
-    case "50d":
-      {
-        return WeatherIcons.d50;
-      }
-    case "01n":
-      {
-        return WeatherIcons.n1;
-      }
-    case "02n":
-      {
-        return WeatherIcons.n2;
-      }
-    case "03n":
-      {
-        return WeatherIcons.n3;
-      }
-    case "04n":
-      {
-        return WeatherIcons.n4;
-      }
-    case "09n":
-      {
-        return WeatherIcons.n9;
-      }
-    case "10n":
-      {
-        return WeatherIcons.n10;
-      }
-    case "11n":
-      {
-        return WeatherIcons.n11;
-      }
-    case "13n":
-      {
-        return WeatherIcons.n13;
-      }
-    default:
-      {
-        return WeatherIcons.n50;
-      }
-  }
-}
+class CachedDataScreen extends StatelessWidget {
+  static const String routeName = "/cached";
 
-class CityInfoScreen extends StatelessWidget {
-  static const String routeName = "/cityInfo";
-
-  const CityInfoScreen({super.key});
+  const CachedDataScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final int index = ModalRoute.of(context)!.settings.arguments as int;
     final _weatherBloc = Provider.of<WeatherBloc>(context);
+    final _cachedData = cachedData[index];
 
     return Container(
         decoration: const BoxDecoration(
@@ -120,10 +46,7 @@ class CityInfoScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
-                            child: Text(
-                                (_weatherBloc.state as WeatherLoaded)
-                                    .weatherData
-                                    .cityName,
+                            child: Text(_cachedData.cityName,
                                 style: AppTextStyles.cityNameBig)),
                         SizedBox(
                             height: 200,
@@ -133,11 +56,7 @@ class CityInfoScreen extends StatelessWidget {
                                         .weatherData
                                         .weatherDescription)))),
                         SizedBox(
-                            child: Text(
-                                (_weatherBloc.state as WeatherLoaded)
-                                    .weatherData
-                                    .day2Temperature
-                                    .toString(),
+                            child: Text(_cachedData.day2Temperature.toString(),
                                 style: AppTextStyles.degreeBig)),
                       ],
                     ),
@@ -153,60 +72,42 @@ class CityInfoScreen extends StatelessWidget {
                                     (_weatherBloc.state as WeatherLoaded)
                                         .weatherData
                                         .weatherDescription),
-                                degree: (_weatherBloc.state as WeatherLoaded)
-                                    .weatherData
-                                    .temperature
-                                    .toInt()),
+                                degree: _cachedData.temperature.toInt()),
                             OneDayForecast(
                                 dayname: "Wednesday",
                                 weatherIcon: getImageByCode(
                                     (_weatherBloc.state as WeatherLoaded)
                                         .weatherData
                                         .weatherDescription2),
-                                degree: (_weatherBloc.state as WeatherLoaded)
-                                    .weatherData
-                                    .day2Temperature
-                                    .toInt()),
+                                degree: _cachedData.day2Temperature.toInt()),
                             OneDayForecast(
                                 dayname: "Thursday",
                                 weatherIcon: getImageByCode(
                                     (_weatherBloc.state as WeatherLoaded)
                                         .weatherData
                                         .weatherDescription3),
-                                degree: (_weatherBloc.state as WeatherLoaded)
-                                    .weatherData
-                                    .day3Temperature
-                                    .toInt()),
+                                degree: _cachedData.day3Temperature.toInt()),
                             OneDayForecast(
                                 dayname: "Friday",
                                 weatherIcon: getImageByCode(
                                     (_weatherBloc.state as WeatherLoaded)
                                         .weatherData
                                         .weatherDescription4),
-                                degree: (_weatherBloc.state as WeatherLoaded)
-                                    .weatherData
-                                    .day4Temperature
-                                    .toInt()),
+                                degree: _cachedData.day4Temperature.toInt()),
                             OneDayForecast(
                                 dayname: "Saturday",
                                 weatherIcon: getImageByCode(
                                     (_weatherBloc.state as WeatherLoaded)
                                         .weatherData
                                         .weatherDescription5),
-                                degree: (_weatherBloc.state as WeatherLoaded)
-                                    .weatherData
-                                    .day5Temperature
-                                    .toInt()),
+                                degree: _cachedData.day5Temperature.toInt()),
                             OneDayForecast(
                                 dayname: "Sunday",
                                 weatherIcon: getImageByCode(
                                     (_weatherBloc.state as WeatherLoaded)
                                         .weatherData
                                         .weatherDescription6),
-                                degree: (_weatherBloc.state as WeatherLoaded)
-                                    .weatherData
-                                    .day6Temperature
-                                    .toInt()),
+                                degree: _cachedData.day6Temperature.toInt()),
                           ]))
                 ]));
               } else if (_weatherBloc.state is WeatherError) {
