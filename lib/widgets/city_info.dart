@@ -12,17 +12,19 @@ class CityInfo extends StatelessWidget {
   final Color bgColor;
   final String imagePath;
   final String cityName;
+  final VoidCallback onTap;
 
   const CityInfo(
       {super.key,
       required this.bgColor,
       required this.imagePath,
-      required this.cityName});
+      required this.cityName,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {},
+      onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: bgColor,

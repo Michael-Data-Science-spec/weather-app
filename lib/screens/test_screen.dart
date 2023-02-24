@@ -1,122 +1,70 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/bloc/login_bloc.dart';
-import 'package:weather_app/screens/home_screen.dart';
-import 'package:weather_app/utils/constants/app_color.dart';
-import 'package:weather_app/utils/constants/app_image_paths.dart';
-import 'package:weather_app/utils/constants/app_sizes.dart';
-import 'package:weather_app/utils/constants/app_string.dart';
-import 'package:weather_app/utils/constants/app_text_styles.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/app/weather_data.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:weather_app/bloc/weather_bloc.dart';
 
 class TestScreen extends StatelessWidget {
+  const TestScreen({Key? key}) : super(key: key);
   static const String routeName = "/test";
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final _loginBloc = Provider.of<LoginBloc>(context);
+    final _weatherBloc = Provider.of<WeatherBloc>(context);
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Form(
-            key: _formKey,
-            child: Column(
+        appBar: AppBar(
+          title: const Text('Weather'),
+        ),
+        body: Builder(builder: (BuildContext context) {
+          if (_weatherBloc.state is WeatherLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (_weatherBloc.state is WeatherLoaded) {
+            final data = (_weatherBloc.state as WeatherLoaded).weatherData;
+            return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(image: AssetImage(ImagePaths.firebase)),
-                SizedBox(height: AppSizes.searchPromptMargin),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: AppColors.searchwhite,
-                    borderRadius:
-                        BorderRadius.circular(AppSizes.searchPromtRadius),
-                  ),
-                  child: SizedBox(
-                    height: AppSizes.searchPromtHeight,
-                    width: AppSizes.searchPromtWidth,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: AppSizes.searchPromtPadding),
-                      child: TextFormField(
-                        controller: _emailController,
-                        decoration: InputDecoration(labelText: 'Username'),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return AppStrings.invalidEmail;
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ),
+                Text(
+                  data.cityName,
+                  style: const TextStyle(fontSize: 24),
                 ),
-                SizedBox(height: AppSizes.searchPromptMargin),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: AppColors.searchwhite,
-                    borderRadius:
-                        BorderRadius.circular(AppSizes.searchPromtRadius),
-                  ),
-                  child: SizedBox(
-                    height: AppSizes.searchPromtHeight,
-                    width: AppSizes.searchPromtWidth,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: AppSizes.searchPromtPadding),
-                      child: TextFormField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(labelText: 'Password'),
-                        obscureText: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ),
+                const SizedBox(height: 16),
+                Text(
+                  '${data.temperature.toStringAsFixed(1)} °C',
+                  style: const TextStyle(fontSize: 48),
                 ),
-                SizedBox(height: AppSizes.searchPromptMargin),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: AppColors.searchwhite,
-                    borderRadius:
-                        BorderRadius.circular(AppSizes.searchPromtRadius),
-                  ),
-                  child: SizedBox(
-                    height: AppSizes.searchPromtHeight,
-                    width: AppSizes.searchPromtWidth,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: AppSizes.searchPromtPadding),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _loginBloc.add(LoginButtonPressed(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            ));
-                            if (_loginBloc.state is LoginSuccess) {
-                              Navigator.pushNamed(
-                                  context, HomeScreen.routeName);
-                            }
-                          }
-                        },
-                        child: Text('Login'),
-                      ),
-                    ),
-                  ),
+                const SizedBox(height: 16),
+                Text(
+                  data.weatherDescription,
+                  style: const TextStyle(fontSize: 24),
                 ),
               ],
-            ),
-          ),
-        ),
-      ),
-    );
+            );
+          } else if (_weatherBloc.state is WeatherError) {
+            return Center(
+              child: Text(
+                (_weatherBloc.state as WeatherError).errorMessage,
+                style: const TextStyle(fontSize: 18),
+              ),
+            );
+          } else {
+            return Center(
+              child: Text(
+                """${_weatherBloc.state is WeatherLoading}\n
+                ${_weatherBloc.state is WeatherLoaded}\n
+                ${_weatherBloc.state is WeatherLoading}\n
+                ${_weatherBloc.state}\n
+                """,
+                style: const TextStyle(fontSize: 18),
+              ),
+            );
+          }
+        }));
   }
 }
