@@ -39,11 +39,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: LoginScreen.routeName,
         routes: {
-          TestScreen.routeName: (context) => TestScreen(),
+          TestScreen.routeName: (context) => const TestScreen(),
           LoginScreen.routeName: (context) => LoginScreen(),
-          HomeScreen.routeName: (context) => HomeScreen(),
-          CityInfoScreen.routeName: (context) => CityInfoScreen(),
-          CachedDataScreen.routeName: (context) => CachedDataScreen(),
+          HomeScreen.routeName: (context) => const HomeScreen(),
+          CityInfoScreen.routeName: (context) => const CityInfoScreen(),
+          CachedDataScreen.routeName: (context) => const CachedDataScreen(),
         },
       ),
     );
