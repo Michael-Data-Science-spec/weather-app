@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/screens/city_info_screen.dart';
 import 'package:weather_app/utils/constants/app_color.dart';
-import 'package:weather_app/screens/cached_data.dart';
+import 'package:weather_app/screens/cached_data_screen.dart';
 import 'package:weather_app/widgets/city_info.dart';
 
 class CityListView extends StatelessWidget {
