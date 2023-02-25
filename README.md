@@ -3,9 +3,10 @@
 A new Flutter project.
 
 ## Getting Started
+figma design https://www.figma.com/file/Gp5PLZ0Ucow6f4xJAlZxB3/weather-app?node-id=0%3A1&t=5sqk2zeqlSqFeMRK-0
 
-Firebase Login: vanilla@gmail.com
-Firebase Password: VanillaUnicorn1488
+- Firebase Login: vanilla@gmail.com
+- Firebase Password: VanillaUnicorn1488
 
 This project is a starting point for a Flutter application.
 
