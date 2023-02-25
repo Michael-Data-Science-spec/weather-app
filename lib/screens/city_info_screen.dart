@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/utils/constants/app_color.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/utils/constants/app_image_paths.dart';
-import 'package:weather_app/utils/constants/app_sizes.dart';
 import 'package:weather_app/utils/constants/app_text_styles.dart';
 import 'package:weather_app/utils/constants/weather_icons.dart';
-import 'package:weather_app/widgets/city_info.dart';
 import 'package:weather_app/widgets/one_day_forecast.dart';
-import 'package:weather_app/widgets/search_field.dart';
 
 String getImageByCode(String code) {
   switch (code) {
@@ -111,7 +107,6 @@ class CityInfoScreen extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else if (_weatherBloc.state is WeatherLoaded) {
-                final data = (_weatherBloc.state as WeatherLoaded).weatherData;
                 return Center(
                     child: Column(children: [
                   Expanded(
@@ -217,10 +212,10 @@ class CityInfoScreen extends StatelessWidget {
                   ),
                 );
               } else {
-                return Center(
+                return const Center(
                   child: Text(
                     "Exception",
-                    style: const TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 );
               }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/utils/constants/app_color.dart';
-import 'package:weather_app/utils/constants/app_image_paths.dart';
 import 'package:weather_app/utils/constants/app_sizes.dart';
-import 'package:weather_app/widgets/city_info.dart';
 import 'package:weather_app/widgets/list_view_cities.dart';
 import 'package:weather_app/widgets/search_field.dart';
 

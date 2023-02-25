@@ -1,11 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/app/weather_data.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 import 'package:weather_app/bloc/weather_bloc.dart';
 
 class TestScreen extends StatelessWidget {

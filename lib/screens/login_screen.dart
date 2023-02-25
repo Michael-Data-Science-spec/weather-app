@@ -6,13 +6,14 @@ import 'package:weather_app/utils/constants/app_color.dart';
 import 'package:weather_app/utils/constants/app_image_paths.dart';
 import 'package:weather_app/utils/constants/app_sizes.dart';
 import 'package:weather_app/utils/constants/app_string.dart';
-import 'package:weather_app/utils/constants/app_text_styles.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = "/login";
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,8 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(image: AssetImage(ImagePaths.firebase)),
-                SizedBox(height: AppSizes.searchPromptMargin),
+                const Image(image: AssetImage(ImagePaths.firebase)),
+                const SizedBox(height: AppSizes.searchPromptMargin),
                 DecoratedBox(
                   decoration: BoxDecoration(
                     color: AppColors.searchwhite,
@@ -43,7 +44,8 @@ class LoginScreen extends StatelessWidget {
                           vertical: 0, horizontal: AppSizes.searchPromtPadding),
                       child: TextFormField(
                         controller: _emailController,
-                        decoration: InputDecoration(labelText: 'Username'),
+                        decoration:
+                            const InputDecoration(labelText: 'Username'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return AppStrings.invalidEmail;
@@ -54,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: AppSizes.searchPromptMargin),
+                const SizedBox(height: AppSizes.searchPromptMargin),
                 DecoratedBox(
                   decoration: BoxDecoration(
                     color: AppColors.searchwhite,
@@ -69,7 +71,8 @@ class LoginScreen extends StatelessWidget {
                           vertical: 0, horizontal: AppSizes.searchPromtPadding),
                       child: TextFormField(
                         controller: _passwordController,
-                        decoration: InputDecoration(labelText: 'Password'),
+                        decoration:
+                            const InputDecoration(labelText: 'Password'),
                         obscureText: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -81,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: AppSizes.searchPromptMargin),
+                const SizedBox(height: AppSizes.searchPromptMargin),
                 DecoratedBox(
                   decoration: BoxDecoration(
                     color: AppColors.searchwhite,
@@ -107,7 +110,7 @@ class LoginScreen extends StatelessWidget {
                             }
                           }
                         },
-                        child: Text('Login'),
+                        child: const Text('Login'),
                       ),
                     ),
                   ),

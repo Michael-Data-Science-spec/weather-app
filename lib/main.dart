@@ -8,7 +8,7 @@ import 'package:weather_app/screens/city_info_screen.dart';
 import 'package:weather_app/screens/home_screen.dart';
 import 'package:weather_app/screens/login_screen.dart';
 import 'package:weather_app/screens/test_screen.dart';
-import 'package:weather_app/utils/constants/cached_data.dart';
+import 'package:weather_app/screens/cached_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

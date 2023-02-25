@@ -1,10 +1,5 @@
-import 'package:flutter/animation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:weather_app/utils/constants/app_color.dart';
-import 'package:weather_app/utils/constants/app_image_paths.dart';
 import 'package:weather_app/utils/constants/app_sizes.dart';
 import 'package:weather_app/utils/constants/app_text_styles.dart';
 

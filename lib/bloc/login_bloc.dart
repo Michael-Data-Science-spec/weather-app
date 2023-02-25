@@ -47,20 +47,4 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>
       }
     });
   }
-
-  @override
-  Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (event is LoginButtonPressed) {
-      yield LoginLoading();
-      try {
-        final user = await _auth.signInWithEmailAndPassword(
-          email: event.email,
-          password: event.password,
-        );
-        yield LoginSuccess(user: user);
-      } catch (error) {
-        yield LoginFailure(error: error.toString());
-      }
-    }
-  }
 }
